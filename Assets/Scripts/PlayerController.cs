@@ -12,6 +12,7 @@ public class PlayerController : MonoBehaviour
     private int count;
     public GameObject player;
     private AudioSource audio;
+    private bool death = false;
     
 
     void Start()
@@ -25,13 +26,19 @@ public class PlayerController : MonoBehaviour
 
     void FixedUpdate()
     {
+        if (audio.isPlaying == false && death == true) {
+            player.SetActive(false);
 
-        float moveHorizontal = Input.GetAxis("Horizontal");
-        float moveVertical = Input.GetAxis("Vertical");
-        
-        Vector3 movement = new Vector3(moveHorizontal, 0.0f, moveVertical);
+        }
+        if (death == false)
+        {
+            float moveHorizontal = Input.GetAxis("Horizontal");
+            float moveVertical = Input.GetAxis("Vertical");
 
-        rb.AddForce(movement * speed);
+            Vector3 movement = new Vector3(moveHorizontal, 0.0f, moveVertical);
+
+            rb.AddForce(movement * speed);
+        }
     }
     void OnTriggerEnter(Collider other)
     {
@@ -48,10 +55,9 @@ public class PlayerController : MonoBehaviour
         if (count > 0)
         { 
             winText.text = "You have sacrificed yourself!";
-
+            death = true;
             audio.Play();
-            player.SetActive(false);
-
+            
         }
     }
 }
