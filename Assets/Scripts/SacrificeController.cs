@@ -23,6 +23,7 @@ public class SacrificeController : MonoBehaviour {
         if (other.gameObject.CompareTag("Finish"))
         {
             SetCountText();
+
         }
     }
     void SetCountText()

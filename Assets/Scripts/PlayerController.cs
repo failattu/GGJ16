@@ -10,12 +10,14 @@ public class PlayerController : MonoBehaviour
     public Text winText;
     private Rigidbody rb;
     private int count;
-    private GameObject[] player;
+    public GameObject player;
+    private AudioSource audio;
     
+
     void Start()
     {
+        audio = GetComponent<AudioSource>();
         rb = GetComponent<Rigidbody>();
-        player = GameObject.FindGameObjectsWithTag("Player");
         count = 0;
         SetCountText();
         winText.text = "";
@@ -46,10 +48,10 @@ public class PlayerController : MonoBehaviour
         if (count > 0)
         { 
             winText.text = "You have sacrificed yourself!";
-            foreach (GameObject user in player)
-            {
-                user.SetActive(false);
-            }
+
+            audio.Play();
+            player.SetActive(false);
+
         }
     }
 }
