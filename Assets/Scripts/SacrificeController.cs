@@ -4,12 +4,10 @@ using UnityEngine.UI;
 
 public class SacrificeController : MonoBehaviour {
     public float force = 3;
-    private GameObject[] sacrifes;
+    public GameObject sacrifes;
     public Text bobSacrifice;
-    void Start()
-    {
-        sacrifes = GameObject.FindGameObjectsWithTag("sacrifice");
-    }
+    public string bobName;
+
     void OnCollisionEnter(Collision collision)
     {
         
@@ -29,11 +27,10 @@ public class SacrificeController : MonoBehaviour {
     }
     void SetCountText()
     {
-            bobSacrifice.text = "You have sacrificed BOB!";
-            foreach (GameObject bob in sacrifes)
-            {
-            bob.SetActive(false);
-            }
+            bobSacrifice.text = "You have sacrificed "+ bobName + "!";
+
+            sacrifes.SetActive(false);
+            
         }
     }
 

@@ -43,7 +43,7 @@ public class PlayerController : MonoBehaviour
     void SetCountText()
     {
         countText.text = "Count: " + count.ToString();
-        if (count > 2)
+        if (count > 0)
         { 
             winText.text = "You have sacrificed yourself!";
             foreach (GameObject user in player)
