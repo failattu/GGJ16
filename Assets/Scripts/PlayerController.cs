@@ -69,7 +69,8 @@ public class PlayerController : MonoBehaviour
             GUI.color = new Color(0, 0, 0, alphaFadeValue);
             GUI.DrawTexture(new Rect(0, 0, Screen.width, Screen.height), blackTexture);
         
-    }
+
+        }
     }
 
         void OnTriggerEnter(Collider other)
