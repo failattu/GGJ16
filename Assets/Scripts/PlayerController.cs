@@ -10,11 +10,12 @@ public class PlayerController : MonoBehaviour
     public Text winText;
     private Rigidbody rb;
     private int count;
-
+    private GameObject[] player;
 
     void Start()
     {
         rb = GetComponent<Rigidbody>();
+        player = GameObject.FindGameObjectsWithTag("Player");
         count = 0;
         SetCountText();
         winText.text = "";
@@ -42,7 +43,13 @@ public class PlayerController : MonoBehaviour
     void SetCountText()
     {
         countText.text = "Count: " + count.ToString();
-        winText.text = "You Win!";
-        
+        if (count > 0)
+        { 
+            winText.text = "You have sacrificed yourself!";
+            foreach (GameObject user in player)
+            {
+                user.SetActive(false);
+            }
+        }
     }
 }
