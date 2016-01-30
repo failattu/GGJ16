@@ -11,7 +11,7 @@ public class PlayerController : MonoBehaviour
     private Rigidbody rb;
     private int count;
     private GameObject[] player;
-
+    
     void Start()
     {
         rb = GetComponent<Rigidbody>();
@@ -43,7 +43,7 @@ public class PlayerController : MonoBehaviour
     void SetCountText()
     {
         countText.text = "Count: " + count.ToString();
-        if (count > 0)
+        if (count > 2)
         { 
             winText.text = "You have sacrificed yourself!";
             foreach (GameObject user in player)
