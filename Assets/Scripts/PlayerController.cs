@@ -93,4 +93,13 @@ public class PlayerController : MonoBehaviour
 
         }
     }
+	void OnCollisionEnter(Collision col)
+	{
+		if(col.gameObject.CompareTag ("wall"))
+		{
+			Vector3 dir = col.contacts [0].point - transform.position;
+			dir = -dir.normalized;
+			GetComponent <Rigidbody> ().AddForce (dir * 300);
+		}
+	}
 }
