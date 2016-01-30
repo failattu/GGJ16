@@ -7,6 +7,9 @@ public class SacrificeController : MonoBehaviour {
     public GameObject sacrifes;
     public Text bobSacrifice;
     public string bobName;
+	public AudioSource scoreAudio;
+	public AudioSource bumpAudio;
+
 
     void OnCollisionEnter(Collision collision)
     {
@@ -16,6 +19,8 @@ public class SacrificeController : MonoBehaviour {
             Vector3 dir = collision.contacts[0].point - transform.position;
             dir = -dir.normalized;
             GetComponent<Rigidbody>().AddForce(dir * force);
+
+			playBumpSound (collision.relativeVelocity.magnitude);
         }
     }
     void OnTriggerEnter(Collider other)
@@ -23,15 +28,26 @@ public class SacrificeController : MonoBehaviour {
         if (other.gameObject.CompareTag("Finish"))
         {
             SetCountText();
-
+			playScoreSound ();
         }
     }
     void SetCountText()
     {
-            bobSacrifice.text = "You have sacrificed "+ bobName + "!";
+        bobSacrifice.text = "You have sacrificed "+ bobName + "!";
 
-            sacrifes.SetActive(false);
-            
-        }
+        sacrifes.SetActive(false);
+        
     }
+	private void playScoreSound(){
+		if (scoreAudio != null) {
+			scoreAudio.Play ();
+		}
+	}
+	private void playBumpSound(float magnitude){
+		if (bumpAudio != null) {
+			bumpAudio.volume = magnitude / 20;
+			bumpAudio.Play ();
+		}
+	}
+}
 
